@@ -1,0 +1,47 @@
+  [1m[35m (92.5ms)[0m  [1m[35mCREATE DATABASE `untitled4_development` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (86.0ms)[0m  [1m[35mCREATE DATABASE `untitled4_test` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (410.9ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (752.8ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT GET_LOCK('656915616739446855', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreatePeople (20230601175252)
+  [1m[35m (313.0ms)[0m  [1m[35mCREATE TABLE `people` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `age` int, `IDno` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230601175252')[0m
+  [1m[36mTRANSACTION (40.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenamePeopleToStudents (20230601175331)
+  [1m[35m (199.1ms)[0m  [1m[35mRENAME TABLE `people` TO `students`[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230601175331')[0m
+  [1m[36mTRANSACTION (60.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTracks (20230601175441)
+  [1m[35m (402.6ms)[0m  [1m[35mCREATE TABLE `tracks` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `description` varchar(255), `logo` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230601175441')[0m
+  [1m[36mTRANSACTION (81.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveLogoFromTracks (20230601175458)
+  [1m[35m (229.9ms)[0m  [1m[35mALTER TABLE `tracks` DROP COLUMN `logo`[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230601175458')[0m
+  [1m[36mTRANSACTION (57.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUniqueIndexToIDnoInStudents (20230601175514)
+  [1m[35m (223.7ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_students_on_IDno` ON `students` (`IDno`)[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230601175514')[0m
+  [1m[36mTRANSACTION (52.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTrackIdToStudents (20230601175528)
+  [1m[35m (266.1ms)[0m  [1m[35mALTER TABLE `students` ADD `track_id` bigint[0m
+  [1m[35m (314.9ms)[0m  [1m[35mCREATE INDEX `index_students_on_track_id` ON `students` (`track_id`)[0m
+  [1m[35m (918.6ms)[0m  [1m[35mALTER TABLE `students` ADD CONSTRAINT `fk_rails_71510987b4`
+FOREIGN KEY (`track_id`)
+  REFERENCES `tracks` (`id`)
+[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230601175528')[0m
+  [1m[36mTRANSACTION (67.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2023-06-01 17:57:56.760318', '2023-06-01 17:57:56.760318')[0m
+  [1m[36mTRANSACTION (40.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT RELEASE_LOCK('656915616739446855')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
